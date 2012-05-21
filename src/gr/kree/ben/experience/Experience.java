@@ -2,9 +2,7 @@ package gr.kree.ben.experience;
 
 import java.util.logging.Logger;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Experience extends JavaPlugin {
@@ -14,18 +12,18 @@ public class Experience extends JavaPlugin {
 	
 	// Override for the standard activation method provided by Bukkit.
 	public void onEnable() {
+		registerAllEvents();
 		logger = this.getLogger();
-		logger.info("Your plugin has been enabled.");
-	}
-	
-	@EventHandler(priority = EventPriority.LOW)
-	public void onPlayerLogin(PlayerLoginEvent event) {
-		
-		
+		logger.info("Experience mod has been enabled!.");
 	}
 	
 	public void onDisable() {
-		logger.info("Your plugin has now been disabled.");
+		logger.info("Experience mod has been disabled.");
+	}
+	
+	private void registerAllEvents() {
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(new BlockListener(), this);
 	}
 	
 }
